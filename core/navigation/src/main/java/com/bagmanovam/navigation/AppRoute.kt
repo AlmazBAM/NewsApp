@@ -1,7 +1,6 @@
-package com.bagmanovam.core_navigation
+package com.bagmanovam.navigation
 
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 sealed interface AppRoute {

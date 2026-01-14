@@ -1,4 +1,4 @@
-package com.bagmanovam.core.ui.theme
+package com.bagmanovam.ui
 
 import androidx.compose.ui.graphics.Color
 
