@@ -1,8 +1,8 @@
 package com.bagmanovam.newsapp
 
 import android.app.Application
-import com.bagmanovam.newsapp.di.appModule
-import com.bagmanovam.newsapp.di.dataModule
+import com.bagmanovam.data.di.appModule
+import com.bagmanovam.data.di.dataModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

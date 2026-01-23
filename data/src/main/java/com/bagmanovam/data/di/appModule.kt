@@ -1,4 +1,4 @@
-package com.bagmanovam.newsapp.di
+package com.bagmanovam.data.di
 
 import org.koin.dsl.module
 

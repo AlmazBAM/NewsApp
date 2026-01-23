@@ -1,55 +1,39 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.news.android.application)
+    alias(libs.plugins.news.android.application.compose)
 }
 
 android {
     namespace = "com.bagmanovam.newsapp"
-    compileSdk {
-        version = release(36)
-    }
 
     defaultConfig {
         applicationId = "com.bagmanovam.newsapp"
-        minSdk = 34
-        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            isShrinkResources = false
+            buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
+        }
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    buildFeatures {
-        compose = true
     }
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.bundles.koin)
-
-    implementation(libs.bundles.room)
-    ksp(libs.room.compiler)
-
-    implementation(libs.bundles.compose)
-
     implementation(project(":core:ui"))
-    implementation(project(":core:navigation"))
     implementation(project(":core:navigation"))
     implementation(project(":data"))
     implementation(project(":domain"))

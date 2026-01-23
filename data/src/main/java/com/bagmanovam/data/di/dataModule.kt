@@ -1,4 +1,4 @@
-package com.bagmanovam.newsapp.di
+package com.bagmanovam.data.di
 
 import android.util.Log
 import androidx.room.Room

@@ -12,14 +12,21 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
     repositories {
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
     }
 }
 
 rootProject.name = "newsApp"
+includeBuild("build-logic")
 include(":app")
 include(":data")
 include(":domain")
@@ -29,3 +36,4 @@ include(":feature:setting")
 include(":core")
 include(":core:navigation")
 include(":core:ui")
+include(":core:common")
