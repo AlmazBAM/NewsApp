@@ -7,7 +7,7 @@ import configs.libs
 class AndroidFeatureImplConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         apply(plugin = "news.android.library")
-        apply(plugin = "news.compose")
+        apply(plugin = "news.android.library.compose")
 
         dependencies {
             add("implementation", libs.findLibrary("androidx-core-ktx").get())

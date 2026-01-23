@@ -19,31 +19,31 @@ gradlePlugin {
     plugins {
         // Регистрируем ваши convention plugins
         register("androidApplication") {
-            id = libs.plugins.news.android.application.get().pluginId
+            id = "news.android.application"
             implementationClass = "AndroidAppConventionPlugin"
         }
         register("androidLibrary") {
-            id = libs.plugins.news.android.library.get().pluginId
+            id = "news.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
         register("androidApplicationCompose") {
-            id = libs.plugins.news.android.application.compose.get().pluginId
+            id = "news.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
         register("androidLibraryCompose") {
-            id = libs.plugins.news.android.library.compose.get().pluginId
+            id = "news.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("androidFeatureImpl") {
-            id = libs.plugins.news.android.feature.impl.get().pluginId
+            id = "news.android.feature.impl"
             implementationClass = "AndroidFeatureImplConventionPlugin"
         }
         register("androidFeatureApi") {
-            id = libs.plugins.news.android.feature.api.get().pluginId
+            id = "news.android.feature.api"
             implementationClass = "AndroidFeatureApiConventionPlugin"
         }
         register("androidData") {
-            id = libs.plugins.news.android.data.get().pluginId
+            id = "news.android.data"
             implementationClass = "AndroidDataConventionPlugin"
         }
     }
