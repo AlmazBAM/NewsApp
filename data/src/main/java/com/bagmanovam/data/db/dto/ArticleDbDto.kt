@@ -10,7 +10,7 @@ import androidx.room.Index
     primaryKeys = ["url", "topic"],
     foreignKeys = [
         ForeignKey(
-            entity = SubscriptionDto::class,
+            entity = SubscriptionDbDto::class,
             parentColumns = ["topic"],
             childColumns = ["topic"],
             onDelete = CASCADE
@@ -20,7 +20,7 @@ import androidx.room.Index
         Index(value = ["topic"])
     ]
 )
-data class ArticleDto(
+data class ArticleDbDto(
     val title: String,
     val description: String,
     val imageUrl: String?,

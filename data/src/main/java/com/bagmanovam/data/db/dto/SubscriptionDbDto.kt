@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "subscriptions")
-data class SubscriptionDto(
+data class SubscriptionDbDto(
     @PrimaryKey
     val topic: String
 )

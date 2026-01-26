@@ -1,9 +1,11 @@
 package com.bagmanovam.common.data
 
 
+//import com.bagmanovam.common.domain.NetworkError
 //import io.ktor.client.call.NoTransformationFoundException
 //import io.ktor.client.call.body
 //import io.ktor.client.statement.HttpResponse
+//import java.net.http.HttpResponse
 //
 //suspend inline fun <reified T> responseToResult(
 //    response: HttpResponse

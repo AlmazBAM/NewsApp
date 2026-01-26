@@ -2,13 +2,13 @@ package com.bagmanovam.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.bagmanovam.data.db.dto.ArticleDto
-import com.bagmanovam.data.db.dto.SubscriptionDto
+import com.bagmanovam.data.db.dto.ArticleDbDto
+import com.bagmanovam.data.db.dto.SubscriptionDbDto
 
 @Database(
     entities = [
-        ArticleDto::class,
-        SubscriptionDto::class
+        ArticleDbDto::class,
+        SubscriptionDbDto::class
     ],
     version = 1,
     exportSchema = false

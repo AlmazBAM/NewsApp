@@ -4,17 +4,17 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ArticleDto(
+data class  ArticleDto(
     @SerialName("description")
-    val description: String? = "",
+    val description: String = "",
     @SerialName("publishedAt")
-    val publishedAt: String? = "",
+    val publishedAt: String = "",
     @SerialName("source")
     val source: SourceDto = SourceDto(),
     @SerialName("title")
-    val title: String? = "",
+    val title: String = "",
     @SerialName("url")
-    val url: String? = "",
+    val url: String = "",
     @SerialName("urlToImage")
     val urlToImage: String? = "",
 )
