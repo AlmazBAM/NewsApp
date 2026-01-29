@@ -29,7 +29,7 @@ class HomeScreenViewModel(
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeScreenState> =
-        MutableStateFlow(HomeScreenState.Loading)
+        MutableStateFlow(HomeScreenState())
     val state = _state
         .onStart {
             observeSelectedTopics()
@@ -38,40 +38,32 @@ class HomeScreenViewModel(
         .stateIn(
             scope = viewModelScope,
             started = kotlinx.coroutines.flow.SharingStarted.WhileSubscribed(5000),
-            initialValue = HomeScreenState.Loading
+            initialValue = HomeScreenState()
         )
 
     fun onAction(action: HomeScreenAction) {
         when (action) {
             is HomeScreenAction.InputTopic -> {
-                val current = _state.value
-                if (current is HomeScreenState.Success) {
-                    _state.update { state ->
-                        current.copy(
-                            topic = action.topic
-                        )
-                    }
+                _state.update { state ->
+                    state.copy(
+                        topic = action.topic
+                    )
                 }
             }
 
             HomeScreenAction.OnClearArticles -> {
                 viewModelScope.launch {
-                    val current = _state.value
-                    if (current is HomeScreenState.Success) {
-                        val topics = current.selectedTopics
-                        clearAllArticlesUseCase(topics)
+                    _state.value.apply {
+                        clearAllArticlesUseCase(selectedTopics)
                     }
                 }
             }
 
             HomeScreenAction.OnClickSubscribe -> {
                 viewModelScope.launch {
-                    val current = _state.value
-                    if (current is HomeScreenState.Success) {
-                        addSubscriptionUseCase(current.topic)
-                        _state.update { state ->
-                            current.copy(topic = "")
-                        }
+                    addSubscriptionUseCase(_state.value.topic)
+                    _state.update { state ->
+                        state.copy(topic = "")
                     }
                 }
             }
@@ -84,16 +76,12 @@ class HomeScreenViewModel(
 
             is HomeScreenAction.OnToggleTopicSelection -> {
                 _state.update { state ->
-                    if (state is HomeScreenState.Success) {
-                        val subscriptions = state.subscriptions.toMutableMap()
-                        val isSelected = subscriptions[action.topic] ?: false
-                        subscriptions[action.topic] = !isSelected
-                        state.copy(
-                            subscriptions = subscriptions
-                        )
-                    } else {
-                        state
-                    }
+                    val subscriptions = state.subscriptions.toMutableMap()
+                    val isSelected = subscriptions[action.topic] ?: false
+                    subscriptions[action.topic] = !isSelected
+                    state.copy(
+                        subscriptions = subscriptions
+                    )
                 }
             }
 
@@ -107,11 +95,7 @@ class HomeScreenViewModel(
 
     private fun observeSelectedTopics() {
         state.map { state ->
-            if (state is HomeScreenState.Success) {
-                state.selectedTopics
-            } else {
-                emptyList()
-            }
+            state.selectedTopics
         }
             .distinctUntilChanged()
             .flatMapLatest { topics ->
@@ -119,13 +103,9 @@ class HomeScreenViewModel(
             }
             .onEach {
                 _state.update { state ->
-                    if (state is HomeScreenState.Success) {
-                        state.copy(
-                            articles = it
-                        )
-                    } else {
-                        state
-                    }
+                    state.copy(
+                        articles = it
+                    )
                 }
             }
             .launchIn(viewModelScope)
@@ -135,15 +115,11 @@ class HomeScreenViewModel(
         getAllSubscriptionsUseCase()
             .onEach { subscriptions ->
                 _state.update { prev ->
-                    if (prev is HomeScreenState.Success) {
-                        prev.copy(
-                            subscriptions = subscriptions.associateWith { topic ->
-                                prev.subscriptions[topic] ?: true
-                            }
-                        )
-                    } else {
-                        prev
-                    }
+                    prev.copy(
+                        subscriptions = subscriptions.associateWith { topic ->
+                            prev.subscriptions[topic] ?: true
+                        }
+                    )
                 }
             }.launchIn(viewModelScope)
     }
