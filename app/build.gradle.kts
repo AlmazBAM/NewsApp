@@ -35,8 +35,8 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(project(":core:ui"))
     implementation(project(":core:navigation"))
-    implementation(project(":data"))
-    implementation(project(":domain"))
+    implementation(project(":core:data"))
+    implementation(project(":core:domain"))
     implementation(project(":feature:news"))
     implementation(project(":feature:setting"))
 }

@@ -13,7 +13,7 @@ class AndroidDataConventionPlugin : Plugin<Project> {
 
 
         dependencies {
-            add("implementation", project(":domain"))
+            add("implementation", project(":core:domain"))
             add("implementation", project(":core:common"))
             add("implementation", libs.findLibrary("androidx-core-ktx").get())
 
