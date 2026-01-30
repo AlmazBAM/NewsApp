@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlin.collections.emptyList
-import kotlin.time.measureTime
 
 class NewsRepositoryImpl(
     private val newsDao: NewsDao,
@@ -60,20 +59,11 @@ class NewsRepositoryImpl(
     override suspend fun updateArticlesForAllSubscriptions(): List<String> {
         val subscriptions = newsDao.getAllSubscriptions().first()
         coroutineScope {
-            val time1 = measureTime {
-                subscriptions.forEach {
-                    launch {
-                        newsApi.loadArticles(it.topic)
-                    }
-                }
-            }
-
-            val time2 = measureTime {
-                subscriptions.forEach {
+            subscriptions.forEach {
+                launch {
                     newsApi.loadArticles(it.topic)
                 }
             }
-            Log.d(TAG, "updateArticlesForAllSubscriptions: coroutine $time1, $time2")
         }
 
         return emptyList()

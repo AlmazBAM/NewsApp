@@ -47,7 +47,6 @@ fun NewsApp() {
                 containerColor = MaterialTheme.colorScheme.background
             ) {
                 BottomBarItem.items.forEach { item ->
-                    Log.e("TAG", "NewsApp: $item", )
                     NavigationBarItem(
                         selected = selected == item,
                         onClick = {
