@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:domain"))
     implementation(project(":core:common"))
+    implementation(project(":sync"))
     implementation(project(":feature:news"))
     implementation(project(":feature:setting"))
 }
