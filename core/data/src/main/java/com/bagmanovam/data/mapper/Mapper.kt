@@ -5,6 +5,8 @@ package com.bagmanovam.data.mapper
 import com.bagmanovam.data.db.dto.ArticleDbDto
 import com.bagmanovam.data.internet.dto.ArticleDto
 import com.bagmanovam.domain.model.Article
+import com.bagmanovam.domain.model.Settings
+import com.bagmanovam.domain.model.UpdateInterval
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -40,13 +42,8 @@ fun List<ArticleDto>.toArticleDb(topic: String): List<ArticleDbDto> {
 }
 
 
-
-fun String.toTimeStamp(): Long {
-    return runCatching {
-        val instant = Instant.parse(this)
-        val millis = instant.toEpochMilliseconds()
-        millis
-    }.getOrElse { System.currentTimeMillis() }
+fun Int.toUpdateInterval(): UpdateInterval {
+    return UpdateInterval.entries.firstOrNull { it.minutes == this } ?: Settings.DEFAULT_UPDATE_INTERVAL
 }
 
 fun String.toTimeStamp(locale: Locale = Locale.getDefault()): Long {

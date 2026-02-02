@@ -9,10 +9,10 @@ interface SettingsRepository {
 
     fun getSettings(): Flow<Settings>
 
-    fun updateLanguage(language: Language)
-    fun updateUpdateInterval(minutes: Int)
-    fun updateTheme(theme: Theme)
+    suspend fun updateLanguage(language: Language)
+    suspend fun updateUpdateInterval(minutes: Int)
+    suspend fun updateTheme(theme: Theme)
 
-    fun updateNotificationsEnabled(enabled: Boolean )
-    fun updateWifiOnly(wifiOnly: Boolean)
+    suspend fun updateNotificationsEnabled(enabled: Boolean )
+    suspend fun updateWifiOnly(wifiOnly: Boolean)
 }

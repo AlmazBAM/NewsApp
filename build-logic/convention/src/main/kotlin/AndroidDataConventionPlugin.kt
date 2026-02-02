@@ -24,6 +24,7 @@ class AndroidDataConventionPlugin : Plugin<Project> {
             addBundle(libs, "koin", configuration = "api")
 
             add("implementation", libs.findLibrary("kotlinx-serialization-json").get())
+            add("implementation", libs.findLibrary("androidx-datastore").get())
 
             add("testImplementation", libs.findLibrary("junit").get())
             add("androidTestImplementation", libs.findLibrary("androidx-junit").get())

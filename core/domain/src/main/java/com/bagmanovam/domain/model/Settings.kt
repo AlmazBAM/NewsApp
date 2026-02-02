@@ -5,8 +5,16 @@ data class Settings(
     val updateInterval: UpdateInterval,
     val theme: Theme,
     val showNotification: Boolean,
-    val wifiOnly: Boolean
-)
+    val wifiOnly: Boolean,
+) {
+    companion object {
+        val DEFAULT_LANGUAGE = Language.ENGLISH
+        val DEFAULT_UPDATE_INTERVAL = UpdateInterval.MIN_15
+        val DEFAULT_THEME = Theme.SYSTEM
+        const val DEFAULT_NOTIFICATIONS_ENABLED = false
+        const val DEFAULT_WIFI_ONLY = false
+    }
+}
 
 enum class Theme {
     SYSTEM, LIGHT, DARK
