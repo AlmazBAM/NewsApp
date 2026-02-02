@@ -3,10 +3,12 @@ package com.bagmanov.sync
 import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
+import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkerParameters
 import com.bagmanovam.domain.usecase.UpdateArticlesForAllSubscriptionsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.concurrent.TimeUnit
 
 private const val TAG = "NewsWorkManager"
 class NewsWorkManager(
@@ -27,5 +29,14 @@ class NewsWorkManager(
 
     }
 
+    companion object {
+        fun startUpSyncWork() = PeriodicWorkRequestBuilder<NewsWorkManager>(
+            repeatInterval = 15L,
+            repeatIntervalTimeUnit = TimeUnit.MINUTES,
+        )
+//            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+            .setConstraints(SyncConstraints)
+            .build()
+    }
 
 }
