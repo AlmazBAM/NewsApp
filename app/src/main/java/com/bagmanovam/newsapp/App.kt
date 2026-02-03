@@ -6,6 +6,7 @@ import com.bagmanovam.data.di.networkModule
 import com.bagmanovam.news.di.appModule
 import com.bagmanovam.newsapp.di.platformModule
 import com.bagmanov.sync.di.syncModule
+import com.bagmanovam.notifications.di.notificationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
@@ -19,7 +20,14 @@ class App : Application() {
             androidContext(this@App)
             androidLogger()
             workManagerFactory()
-            modules(appModule, platformModule, dataModule, networkModule, syncModule)
+            modules(
+                appModule,
+                platformModule,
+                dataModule,
+                networkModule,
+                syncModule,
+                notificationModule
+            )
         }
     }
 }

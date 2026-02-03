@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="news_updates_channel">News updates</string>
+    <string name="news_updates">News updates</string>
+    <string name="update_subscriptions">Update %1$d subscriptions: %2$s</string>
+</resources>

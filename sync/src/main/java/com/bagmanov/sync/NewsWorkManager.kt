@@ -20,7 +20,7 @@ class NewsWorkManager(
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         Log.i(TAG, "doWork: start", )
         try {
-            updateArticlesForAllSubscriptionsUseCase()
+            val topics = updateArticlesForAllSubscriptionsUseCase()
             Log.i(TAG, "doWork: finish success")
             Result.success()
         } catch (e: Exception) {

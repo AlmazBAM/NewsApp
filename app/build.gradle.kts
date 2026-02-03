@@ -45,11 +45,12 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(project(":core:ui"))
-    implementation(project(":core:navigation"))
+    implementation(project(":core:common"))
     implementation(project(":core:data"))
     implementation(project(":core:domain"))
-    implementation(project(":core:common"))
+    implementation(project(":core:navigation"))
+    implementation(project(":core:notifications"))
+    implementation(project(":core:ui"))
     implementation(project(":sync"))
     implementation(project(":feature:news"))
     implementation(project(":feature:setting"))
