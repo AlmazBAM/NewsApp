@@ -5,7 +5,7 @@ import com.bagmanovam.data.di.dataModule
 import com.bagmanovam.data.di.networkModule
 import com.bagmanovam.news.di.appModule
 import com.bagmanovam.newsapp.di.platformModule
-import com.bagmanovam.sync.di.syncModule
+import com.bagmanov.sync.di.syncModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
