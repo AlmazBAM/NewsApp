@@ -1,6 +1,7 @@
 package com.bagmanovam.domain.repository
 
 import com.bagmanovam.domain.model.Language
+import com.bagmanovam.domain.model.RefreshConfig
 import com.bagmanovam.domain.model.Settings
 import com.bagmanovam.domain.model.Theme
 import kotlinx.coroutines.flow.Flow
@@ -8,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface SettingsRepository {
 
     fun getSettings(): Flow<Settings>
+    fun getRefreshConfigSettings(): Flow<RefreshConfig>
 
     suspend fun updateLanguage(language: Language)
     suspend fun updateUpdateInterval(minutes: Int)

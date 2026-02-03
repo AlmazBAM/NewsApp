@@ -5,6 +5,7 @@ package com.bagmanovam.data.mapper
 import com.bagmanovam.data.db.dto.ArticleDbDto
 import com.bagmanovam.data.internet.dto.ArticleDto
 import com.bagmanovam.domain.model.Article
+import com.bagmanovam.domain.model.RefreshConfig
 import com.bagmanovam.domain.model.Settings
 import com.bagmanovam.domain.model.UpdateInterval
 import java.time.LocalDateTime
@@ -12,7 +13,6 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
 
 fun List<ArticleDbDto>.toArticle(): List<Article> {
     return map {
@@ -39,6 +39,15 @@ fun List<ArticleDto>.toArticleDb(topic: String): List<ArticleDbDto> {
             topic = topic
         )
     }.distinct()
+}
+
+fun Settings.toRefreshConfig(): RefreshConfig {
+    return RefreshConfig(
+        language = language,
+        updateInterval = updateInterval,
+        theme = theme,
+        wifiOnly = wifiOnly
+    )
 }
 
 

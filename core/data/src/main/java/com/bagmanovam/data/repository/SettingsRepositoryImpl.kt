@@ -8,13 +8,18 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.bagmanovam.data.mapper.toRefreshConfig
 import com.bagmanovam.data.mapper.toUpdateInterval
 import com.bagmanovam.domain.model.Language
+import com.bagmanovam.domain.model.RefreshConfig
 import com.bagmanovam.domain.model.Settings
 import com.bagmanovam.domain.model.Theme
 import com.bagmanovam.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore("settings")
 
@@ -37,6 +42,11 @@ class SettingsRepositoryImpl(
                 wifiOnly = prefs[wifiOnlyKey] ?: Settings.DEFAULT_WIFI_ONLY
             )
         }
+    }
+
+    override fun getRefreshConfigSettings(): Flow<RefreshConfig> {
+       return getSettings()
+            .map { it.toRefreshConfig() }
     }
 
     override suspend fun updateLanguage(language: Language) {
