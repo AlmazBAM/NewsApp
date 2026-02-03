@@ -1,7 +1,6 @@
 package com.bagmanovam.newsapp
 
 import android.app.Application
-import com.bagmanov.sync.NewsWorkManagerInitializer
 import com.bagmanovam.data.di.dataModule
 import com.bagmanovam.data.di.networkModule
 import com.bagmanovam.news.di.appModule
@@ -22,6 +21,5 @@ class App : Application() {
             workManagerFactory()
             modules(appModule, platformModule, dataModule, networkModule, syncModule)
         }
-        NewsWorkManagerInitializer.initialize(this)
     }
 }

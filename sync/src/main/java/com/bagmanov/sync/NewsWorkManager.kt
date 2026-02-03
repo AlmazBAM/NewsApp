@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkerParameters
+import com.bagmanovam.domain.model.RefreshConfig
 import com.bagmanovam.domain.usecase.UpdateArticlesForAllSubscriptionsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -30,12 +31,12 @@ class NewsWorkManager(
     }
 
     companion object {
-        fun startUpSyncWork() = PeriodicWorkRequestBuilder<NewsWorkManager>(
-            repeatInterval = 15L,
+        fun startUpSyncWork(config: RefreshConfig) = PeriodicWorkRequestBuilder<NewsWorkManager>(
+            repeatInterval = config.updateInterval.minutes.toLong(),
             repeatIntervalTimeUnit = TimeUnit.MINUTES,
         )
 //            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-            .setConstraints(SyncConstraints)
+            .setConstraints(syncConstraints(config.wifiOnly))
             .build()
     }
 

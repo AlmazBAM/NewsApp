@@ -2,18 +2,17 @@ package com.bagmanov.sync
 
 import android.content.Context
 import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import java.util.concurrent.TimeUnit
+import com.bagmanovam.domain.model.RefreshConfig
 
 object NewsWorkManagerInitializer {
 
-    fun initialize(context: Context) {
+    fun initialize(context: Context, config: RefreshConfig) {
         WorkManager.getInstance(context).apply {
             enqueueUniquePeriodicWork(
                 uniqueWorkName = SYNC_WORK_NAME,
-                existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP,
-                request = NewsWorkManager.startUpSyncWork()
+                existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
+                request = NewsWorkManager.startUpSyncWork(config)
             )
         }
     }
