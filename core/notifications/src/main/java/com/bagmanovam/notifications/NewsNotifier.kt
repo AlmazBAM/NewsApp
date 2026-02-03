@@ -21,6 +21,7 @@ class NewsNotifier(
 ) : Notifier {
     override fun postNotifications(topics: List<String>) = with(context) {
 
+        if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PERMISSION_GRANTED) return
         val notificationManager = NotificationManagerCompat.from(this)
 
         val summaryNotification = createNotification {
@@ -29,14 +30,15 @@ class NewsNotifier(
                 topics.size,
                 topics.joinToString(", ")
             )
-            setContentTitle(getString(R.string.news_updates))
+            setSmallIcon(R.drawable.news)
+                .setContentTitle(getString(R.string.news_updates))
                 .setContentText(title)
                 .setGroup(NOTIFICATION_GROUP)
                 .setAutoCancel(true)
                 .build()
         }
 
-        notificationManager.notify(NOTIFICATION_ID, summaryNotification)
+        notificationManager.notify(topics.joinToString().hashCode(), summaryNotification)
     }
 
 
