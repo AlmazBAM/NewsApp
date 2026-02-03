@@ -1,4 +1,4 @@
-package com.bagmanovam.sync.di
+package com.bagmanov.sync.di
 
 import android.util.Log
 import com.bagmanov.sync.NewsWorkManager
