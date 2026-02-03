@@ -4,7 +4,10 @@ import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import androidx.core.app.NotificationCompat
@@ -12,9 +15,11 @@ import androidx.core.app.NotificationManagerCompat
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 
 
-private const val NOTIFICATION_ID = ""
+private const val NOTIFICATION_ID = 1
 private const val NOTIFICATION_CHANNEL_ID = "ARTICLES_CHANNEL"
 private const val NOTIFICATION_GROUP = "NEWS_NOTIFICATIONS_GROUP"
+private const val NOTIFICATION_REQUEST_CODE = 0
+private const val TARGET_ACTIVITY_NAME = "com.bagmanovam.news.MainActivity"
 
 class NewsNotifier(
     private val context: Context,
@@ -34,11 +39,12 @@ class NewsNotifier(
                 .setContentTitle(getString(R.string.news_updates))
                 .setContentText(title)
                 .setGroup(NOTIFICATION_GROUP)
+                .setContentIntent(createPendingIntent())
                 .setAutoCancel(true)
                 .build()
         }
 
-        notificationManager.notify(topics.joinToString().hashCode(), summaryNotification)
+        notificationManager.notify(NOTIFICATION_ID, summaryNotification)
     }
 
 
@@ -65,4 +71,15 @@ class NewsNotifier(
         )
         NotificationManagerCompat.from(this).createNotificationChannel(channel)
     }
+
+    fun Context.createPendingIntent(): PendingIntent =
+        PendingIntent.getActivity(
+            this,
+            NOTIFICATION_REQUEST_CODE,
+            Intent().apply {
+                component = ComponentName(packageName, TARGET_ACTIVITY_NAME)
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            },
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
 }
