@@ -36,7 +36,7 @@ class NewsRepositoryImpl(
         newsDao.addSubscription(SubscriptionDbDto(topic = topic))
     }
 
-    override suspend fun updateArticlesForTopic(topic: String) {
+    override suspend fun updateArticlesForTopic(topic: String): Boolean {
         try {
             var articles = listOf<ArticleDbDto>()
             newsApi.loadArticles(topic = topic)
@@ -45,10 +45,12 @@ class NewsRepositoryImpl(
                 }.onError {
                     articles = emptyList()
                 }
-            newsDao.addArticles(articles)
+            val ids = newsDao.addArticles(articles)
+            return ids.any { it != -1L }
         } catch (e: Exception) {
             if (e is CancellationException) throw e
             Log.e(TAG, "updateArticlesForTopic: error ${e.message}")
+            return false
         }
     }
 
@@ -57,16 +59,19 @@ class NewsRepositoryImpl(
     }
 
     override suspend fun updateArticlesForAllSubscriptions(): List<String> {
+        val updatedTopics = mutableListOf<String>()
         val subscriptions = newsDao.getAllSubscriptions().first()
         coroutineScope {
-            subscriptions.forEach {
+            subscriptions.forEach { subscriptionDbDto ->
                 launch {
-                    newsApi.loadArticles(it.topic)
+                    updateArticlesForTopic(subscriptionDbDto.topic).also {
+                        if (it) updatedTopics.add(subscriptionDbDto.topic)
+                    }
                 }
             }
         }
 
-        return emptyList()
+        return updatedTopics
 
     }
 
