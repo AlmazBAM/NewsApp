@@ -14,7 +14,8 @@ val syncModule = module {
             context = get(),
             params = get(),
             updateArticlesForAllSubscriptionsUseCase = get(),
-            get()
+            settingsUseCase = get(),
+            notifier = get()
         )
     }
 
