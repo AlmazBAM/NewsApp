@@ -2,9 +2,11 @@
 
 package com.bagmanovam.data.mapper
 
+import android.os.Build
 import com.bagmanovam.data.db.dto.ArticleDbDto
 import com.bagmanovam.data.internet.dto.ArticleDto
 import com.bagmanovam.domain.model.Article
+import com.bagmanovam.domain.model.Language
 import com.bagmanovam.domain.model.RefreshConfig
 import com.bagmanovam.domain.model.Settings
 import com.bagmanovam.domain.model.UpdateInterval
@@ -50,6 +52,15 @@ fun Settings.toRefreshConfig(): RefreshConfig {
     )
 }
 
+fun Language.toQueryParam(): String {
+    return when (this) {
+        Language.ENGLISH -> "en"
+        Language.RUSSIAN -> "ru"
+        Language.FRENCH -> "fr"
+        Language.GERMAN -> "de"
+    }
+}
+
 
 fun Int.toUpdateInterval(): UpdateInterval {
     return UpdateInterval.entries.firstOrNull { it.minutes == this } ?: Settings.DEFAULT_UPDATE_INTERVAL
@@ -57,8 +68,12 @@ fun Int.toUpdateInterval(): UpdateInterval {
 
 fun String.toTimeStamp(locale: Locale = Locale.getDefault()): Long {
     return runCatching {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", locale)
-        LocalDateTime.parse(this, formatter).toInstant(ZoneOffset.UTC).toEpochMilli()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", locale)
+            LocalDateTime.parse(this, formatter).toInstant(ZoneOffset.UTC).toEpochMilli()
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
     }.getOrElse {
         System.currentTimeMillis()
     }
