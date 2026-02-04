@@ -9,7 +9,9 @@ import com.bagmanovam.data.db.dto.SubscriptionDbDto
 import com.bagmanovam.data.internet.NewsApi
 import com.bagmanovam.data.mapper.toArticle
 import com.bagmanovam.data.mapper.toArticleDb
+import com.bagmanovam.data.mapper.toQueryParam
 import com.bagmanovam.domain.model.Article
+import com.bagmanovam.domain.model.Language
 import com.bagmanovam.domain.repository.NewsRepository
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.coroutineScope
@@ -36,10 +38,13 @@ class NewsRepositoryImpl(
         newsDao.addSubscription(SubscriptionDbDto(topic = topic))
     }
 
-    override suspend fun updateArticlesForTopic(topic: String): Boolean {
+    override suspend fun updateArticlesForTopic(topic: String, language: Language): Boolean {
         try {
             var articles = listOf<ArticleDbDto>()
-            newsApi.loadArticles(topic = topic)
+            newsApi.loadArticles(
+                topic = topic,
+                language = language.toQueryParam()
+            )
                 .onSuccess {
                     articles = it.articles.toArticleDb(topic = topic)
                 }.onError {
@@ -58,13 +63,13 @@ class NewsRepositoryImpl(
         newsDao.deleteSubscription(SubscriptionDbDto(topic = topic))
     }
 
-    override suspend fun updateArticlesForAllSubscriptions(): List<String> {
+    override suspend fun updateArticlesForAllSubscriptions(language: Language): List<String> {
         val updatedTopics = mutableListOf<String>()
         val subscriptions = newsDao.getAllSubscriptions().first()
         coroutineScope {
             subscriptions.forEach { subscriptionDbDto ->
                 launch {
-                    updateArticlesForTopic(subscriptionDbDto.topic).also {
+                    updateArticlesForTopic(subscriptionDbDto.topic, language).also {
                         if (it) updatedTopics.add(subscriptionDbDto.topic)
                     }
                 }
