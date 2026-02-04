@@ -11,6 +11,7 @@ import com.bagmanovam.domain.interactor.AddSubscriptionInteractor
 import com.bagmanovam.domain.interactor.ClearAllArticlesInteractor
 import com.bagmanovam.domain.interactor.GetAllSubscriptionsInteractor
 import com.bagmanovam.domain.interactor.GetArticlesByTopicsUseCaseInteractor
+import com.bagmanovam.domain.interactor.GetSettingsInteractor
 import com.bagmanovam.domain.interactor.RemoveSubscriptionInteractor
 import com.bagmanovam.domain.interactor.StartRefreshDataInteractor
 import com.bagmanovam.domain.interactor.UpdateArticlesForAllSubscriptionsInteractor
@@ -20,6 +21,7 @@ import com.bagmanovam.domain.usecase.AddSubscriptionUseCase
 import com.bagmanovam.domain.usecase.ClearAllArticlesUseCase
 import com.bagmanovam.domain.usecase.GetAllSubscriptionsUseCase
 import com.bagmanovam.domain.usecase.GetArticlesByTopicsUseCase
+import com.bagmanovam.domain.usecase.GetSettingsUseCase
 import com.bagmanovam.domain.usecase.RemoveSubscriptionUseCase
 import com.bagmanovam.domain.usecase.StartRefreshDataUseCase
 import com.bagmanovam.domain.usecase.UpdateArticlesForAllSubscriptionsUseCase
@@ -40,6 +42,7 @@ val dataModule = module {
     factoryOf(::RemoveSubscriptionInteractor).bind<RemoveSubscriptionUseCase>()
     factoryOf(::UpdateArticlesForAllSubscriptionsInteractor).bind<UpdateArticlesForAllSubscriptionsUseCase>()
     factoryOf(::StartRefreshDataInteractor).bind<StartRefreshDataUseCase>()
+    factoryOf(::GetSettingsInteractor).bind<GetSettingsUseCase>()
 
     single<NewsDatabase> {
         Room.databaseBuilder(
