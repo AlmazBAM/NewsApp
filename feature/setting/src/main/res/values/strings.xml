@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">setting</string>
+    <string name="notification_enabled">Push notifications</string>
+    <string name="wifi_only">Download by wifi only</string>
+    <string name="preference_section">PREFERENCES</string>
 </resources>
