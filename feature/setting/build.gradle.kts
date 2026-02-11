@@ -6,3 +6,7 @@ plugins {
 android {
     namespace = "com.bagmanovam.setting"
 }
+
+dependencies {
+    implementation(project(":core:domain"))
+}

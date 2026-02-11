@@ -1,6 +1,7 @@
 package com.bagmanovam.setting
 
 import androidx.compose.runtime.Immutable
+import com.bagmanovam.domain.model.Theme
 
 @Immutable
 data class SettingState(
@@ -8,9 +9,3 @@ data class SettingState(
     val wifiOnly: Boolean = false,
     val theme: Theme = Theme.SYSTEM
 )
-
-enum class Theme {
-    SYSTEM,
-    LIGHT,
-    DARK
-}
