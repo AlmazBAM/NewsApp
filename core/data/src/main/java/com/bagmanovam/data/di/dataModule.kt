@@ -15,6 +15,9 @@ import com.bagmanovam.domain.interactor.GetSettingsInteractor
 import com.bagmanovam.domain.interactor.RemoveSubscriptionInteractor
 import com.bagmanovam.domain.interactor.StartRefreshDataInteractor
 import com.bagmanovam.domain.interactor.UpdateArticlesForAllSubscriptionsInteractor
+import com.bagmanovam.domain.interactor.UpdateNotificationsEnabledInteractor
+import com.bagmanovam.domain.interactor.UpdateThemeInteractor
+import com.bagmanovam.domain.interactor.UpdateWifiOnlyInteractor
 import com.bagmanovam.domain.repository.NewsRepository
 import com.bagmanovam.domain.repository.SettingsRepository
 import com.bagmanovam.domain.usecase.AddSubscriptionUseCase
@@ -25,6 +28,9 @@ import com.bagmanovam.domain.usecase.GetSettingsUseCase
 import com.bagmanovam.domain.usecase.RemoveSubscriptionUseCase
 import com.bagmanovam.domain.usecase.StartRefreshDataUseCase
 import com.bagmanovam.domain.usecase.UpdateArticlesForAllSubscriptionsUseCase
+import com.bagmanovam.domain.usecase.UpdateNotificationsEnabledUseCase
+import com.bagmanovam.domain.usecase.UpdateThemeUseCase
+import com.bagmanovam.domain.usecase.UpdateWifiOnlyUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -43,6 +49,9 @@ val dataModule = module {
     factoryOf(::UpdateArticlesForAllSubscriptionsInteractor).bind<UpdateArticlesForAllSubscriptionsUseCase>()
     factoryOf(::StartRefreshDataInteractor).bind<StartRefreshDataUseCase>()
     factoryOf(::GetSettingsInteractor).bind<GetSettingsUseCase>()
+    factoryOf(::UpdateNotificationsEnabledInteractor).bind<UpdateNotificationsEnabledUseCase>()
+    factoryOf(::UpdateWifiOnlyInteractor).bind<UpdateWifiOnlyUseCase>()
+    factoryOf(::UpdateThemeInteractor).bind<UpdateThemeUseCase>()
 
     single<NewsDatabase> {
         Room.databaseBuilder(
