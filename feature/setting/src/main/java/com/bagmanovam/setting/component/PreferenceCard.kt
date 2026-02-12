@@ -4,11 +4,17 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,6 +51,21 @@ fun PreferenceCard(
                 onCheckedChange = {
                     onSettingAction(SettingAction.ToggleNotification(it))
                 },
+                thumbContent = {
+                    if (state.notificationEnabled) {
+                        Icon(
+                            modifier = Modifier.size(SwitchDefaults.IconSize),
+                            imageVector = Icons.Filled.Check,
+                            contentDescription = null
+                        )
+                    } else {
+                        Icon(
+                            modifier = Modifier.size(SwitchDefaults.IconSize),
+                            imageVector = Icons.Filled.Close,
+                            contentDescription = null
+                        )
+                    }
+                }
             )
         }
 
@@ -59,6 +80,21 @@ fun PreferenceCard(
                 onCheckedChange = {
                     onSettingAction(SettingAction.ToggleWifiOnly(it))
                 },
+                thumbContent = {
+                    if (state.wifiOnly) {
+                        Icon(
+                            modifier = Modifier.size(SwitchDefaults.IconSize),
+                            imageVector = Icons.Filled.Check,
+                            contentDescription = null
+                        )
+                    } else {
+                        Icon(
+                            modifier = Modifier.size(SwitchDefaults.IconSize),
+                            imageVector = Icons.Filled.Close,
+                            contentDescription = null
+                        )
+                    }
+                }
             )
         }
 
