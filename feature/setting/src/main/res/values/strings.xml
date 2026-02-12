@@ -2,5 +2,9 @@
     <string name="notification_enabled">Push notifications</string>
     <string name="wifi_only">Download by wifi only</string>
     <string name="theme">App theme</string>
+    <string name="personal_information">Personal information</string>
+
+
     <string name="preference_section">PREFERENCES</string>
+    <string name="account_section">ACCOUNT</string>
 </resources>
