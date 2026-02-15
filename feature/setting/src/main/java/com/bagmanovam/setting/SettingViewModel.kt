@@ -29,6 +29,7 @@ class SettingViewModel(
                 }
                 viewModelScope.launch { updateNotificationsEnabledUseCase(action.enabled) }
             }
+
             is SettingAction.ToggleWifiOnly -> {
                 _state.update { state ->
                     state.copy(
@@ -45,6 +46,14 @@ class SettingViewModel(
                     )
                 }
                 viewModelScope.launch { updateThemeUseCase(action.theme) }
+            }
+
+            is SettingAction.UpdateAvatar -> {
+                _state.update { state ->
+                    state.copy(
+                        icon = action.imageUri.toString()
+                    )
+                }
             }
         }
     }

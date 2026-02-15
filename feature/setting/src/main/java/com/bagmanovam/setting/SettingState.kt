@@ -7,5 +7,7 @@ import com.bagmanovam.domain.model.Theme
 data class SettingState(
     val notificationEnabled: Boolean = false,
     val wifiOnly: Boolean = false,
-    val theme: Theme = Theme.SYSTEM
+    val theme: Theme = Theme.SYSTEM,    val name: String = "",
+    val email: String = "",
+    val icon: String? = null
 )

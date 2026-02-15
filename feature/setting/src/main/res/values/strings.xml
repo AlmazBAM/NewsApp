@@ -7,4 +7,6 @@
 
     <string name="preference_section">PREFERENCES</string>
     <string name="account_section">ACCOUNT</string>
+    <string name="unknown_name">Unknown</string>
+    <string name="unknown_email">Unknown</string>
 </resources>
