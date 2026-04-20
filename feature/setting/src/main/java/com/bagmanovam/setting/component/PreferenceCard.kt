@@ -18,7 +18,6 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -37,9 +36,9 @@ fun PreferenceCard(
     onSettingAction: (SettingAction) -> Unit
 ) {
     var clicked by remember { mutableStateOf(false) }
-    var selectedIndex by remember { mutableIntStateOf(0) }
 
     val items = listOf(Theme.SYSTEM, Theme.LIGHT, Theme.DARK)
+    val selectedIndex = items.indexOf(state.theme).coerceAtLeast(0)
 
     SettingCard {
         SettingRow(
@@ -115,7 +114,6 @@ fun PreferenceCard(
                         SegmentedButton(
                             selected = index == selectedIndex,
                             onClick = {
-                                selectedIndex = index
                                 onSettingAction(SettingAction.UpdateTheme(theme))
                             },
                             shape = SegmentedButtonDefaults.itemShape(
