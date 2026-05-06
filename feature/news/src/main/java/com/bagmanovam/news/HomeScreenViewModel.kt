@@ -61,10 +61,11 @@ class HomeScreenViewModel(
 
             HomeScreenAction.OnClickSubscribe -> {
                 viewModelScope.launch {
-                    addSubscriptionUseCase(_state.value.topic)
+                    val topic = _state.value.topic
                     _state.update { state ->
                         state.copy(topic = "")
                     }
+                    addSubscriptionUseCase(topic)
                 }
             }
 
