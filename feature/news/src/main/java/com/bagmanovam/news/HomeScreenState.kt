@@ -1,14 +1,14 @@
 package com.bagmanovam.news
 
 import androidx.compose.runtime.Immutable
-import com.bagmanovam.domain.model.Article
+import com.bagmanovam.news.model.ArticleUi
 
 @Immutable
 data class HomeScreenState(
     val topic: String = "",
     val isLoading: Boolean = false,
     val subscriptions: Map<String, Boolean> = mapOf(),
-    val articles: List<Article> = listOf(),
+    val articles: List<ArticleUi> = listOf(),
     val addStatus: AddStatus = AddStatus.Idle
 ) {
     val selectedTopics: List<String>

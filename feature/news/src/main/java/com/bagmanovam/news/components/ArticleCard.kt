@@ -30,15 +30,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import coil3.compose.AsyncImage
-import com.bagmanovam.domain.model.Article
+import com.bagmanovam.news.model.ArticleUi
 import com.bagmanovam.news.R
 import com.bagmanovam.ui.CustomIcons
 
 @Composable
 fun ArticleCard(
     modifier: Modifier = Modifier,
-    article: Article,
-    onArticleClick: (Article) -> Unit,
+    article: ArticleUi,
+    onArticleClick: (ArticleUi) -> Unit,
 ) {
     Card(
         modifier = modifier.clickable(

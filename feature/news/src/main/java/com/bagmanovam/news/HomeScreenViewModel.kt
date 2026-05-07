@@ -8,6 +8,7 @@ import com.bagmanovam.domain.usecase.GetAllSubscriptionsUseCase
 import com.bagmanovam.domain.usecase.GetArticlesByTopicsUseCase
 import com.bagmanovam.domain.usecase.RemoveSubscriptionUseCase
 import com.bagmanovam.domain.usecase.UpdateArticlesForAllSubscriptionsUseCase
+import com.bagmanovam.news.model.toArticleUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
@@ -102,10 +103,10 @@ class HomeScreenViewModel(
             .flatMapLatest { topics ->
                 getArticleByTopicsUseCase(topics)
             }
-            .onEach {
+            .onEach { articles ->
                 _state.update { state ->
                     state.copy(
-                        articles = it
+                        articles = articles.map { it.toArticleUi() }
                     )
                 }
             }
