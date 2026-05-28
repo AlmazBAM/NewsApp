@@ -10,6 +10,4 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.kotlinx.serialization.json)
-
-    api(libs.bundles.koin)
 }

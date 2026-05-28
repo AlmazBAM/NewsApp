@@ -122,10 +122,13 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+androidx-room = { id = "androidx.room", version.ref = "room" }
 
 news-android-application = { id = "news.android.application" }
 news-android-application-compose = { id = "news.android.application.compose" }
 news-android-data = { id = "news.android.data" }
+news-room = { id = "news.android.room" }
+news-koin = { id = "news.koin" }
 news-android-feature-api = { id = "news.android.feature.api" }
 news-android-feature-impl = { id = "news.android.feature.impl" }
 news-android-library = { id = "news.android.library" }
