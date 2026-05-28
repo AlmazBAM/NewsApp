@@ -1,4 +1,4 @@
-package com.bagmanovam.data.db
+package com.bagmanovam.news.core.database
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,8 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.Companion.IGNORE
 import androidx.room.Query
 import androidx.room.Transaction
-import com.bagmanovam.data.db.dto.ArticleDbDto
-import com.bagmanovam.data.db.dto.SubscriptionDbDto
+import com.bagmanovam.news.core.database.dto.ArticleDbDto
+import com.bagmanovam.news.core.database.dto.SubscriptionDbDto
 import kotlinx.coroutines.flow.Flow
 
 @Dao

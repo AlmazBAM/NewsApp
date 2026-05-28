@@ -1,10 +1,5 @@
 package com.bagmanovam.data.di
 
-import android.util.Log
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.bagmanovam.data.db.NewsDatabase
 import com.bagmanovam.data.repository.NewsRepositoryImpl
 import com.bagmanovam.data.repository.SettingsRepositoryImpl
 import com.bagmanovam.domain.interactor.AddSubscriptionInteractor
@@ -31,12 +26,14 @@ import com.bagmanovam.domain.usecase.UpdateArticlesForAllSubscriptionsUseCase
 import com.bagmanovam.domain.usecase.UpdateNotificationsEnabledUseCase
 import com.bagmanovam.domain.usecase.UpdateThemeUseCase
 import com.bagmanovam.domain.usecase.UpdateWifiOnlyUseCase
+import com.bagmanovam.news.core.database.di.databaseModule
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val dataModule = module {
+    includes(databaseModule)
 
     singleOf(::NewsRepositoryImpl).bind<NewsRepository>()
     singleOf(::SettingsRepositoryImpl).bind<SettingsRepository>()
@@ -52,33 +49,4 @@ val dataModule = module {
     factoryOf(::UpdateNotificationsEnabledInteractor).bind<UpdateNotificationsEnabledUseCase>()
     factoryOf(::UpdateWifiOnlyInteractor).bind<UpdateWifiOnlyUseCase>()
     factoryOf(::UpdateThemeInteractor).bind<UpdateThemeUseCase>()
-
-    single<NewsDatabase> {
-        Room.databaseBuilder(
-            context = get(),
-            klass = NewsDatabase::class.java,
-            name = "newsDatabase"
-        )
-            .addCallback(object : RoomDatabase.Callback() {
-                override fun onCreate(db: SupportSQLiteDatabase) {
-                    super.onCreate(db)
-                    Log.i("Room", "onCreate: ")
-                }
-
-                override fun onOpen(db: SupportSQLiteDatabase) {
-                    super.onOpen(db)
-                    Log.i("Room", "onOpen: ${db.path}")
-                }
-
-                override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
-                    super.onDestructiveMigration(db)
-                    Log.i("Room", "onDestructiveMigration: ${db.version}")
-                }
-            })
-            .build()
-    }
-
-    single {
-        get<NewsDatabase>().dao()
-    }
 }

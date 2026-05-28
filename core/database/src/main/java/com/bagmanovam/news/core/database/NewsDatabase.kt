@@ -1,9 +1,9 @@
-package com.bagmanovam.data.db
+package com.bagmanovam.news.core.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.bagmanovam.data.db.dto.ArticleDbDto
-import com.bagmanovam.data.db.dto.SubscriptionDbDto
+import com.bagmanovam.news.core.database.dto.ArticleDbDto
+import com.bagmanovam.news.core.database.dto.SubscriptionDbDto
 
 @Database(
     entities = [

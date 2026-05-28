@@ -3,9 +3,9 @@ package com.bagmanovam.data.repository
 import android.util.Log
 import com.bagmanovam.common.domain.onError
 import com.bagmanovam.common.domain.onSuccess
-import com.bagmanovam.data.db.NewsDao
-import com.bagmanovam.data.db.dto.ArticleDbDto
-import com.bagmanovam.data.db.dto.SubscriptionDbDto
+import com.bagmanovam.news.core.database.NewsDao
+import com.bagmanovam.news.core.database.dto.ArticleDbDto
+import com.bagmanovam.news.core.database.dto.SubscriptionDbDto
 import com.bagmanovam.data.internet.NewsApi
 import com.bagmanovam.data.mapper.toArticle
 import com.bagmanovam.data.mapper.toArticleDb

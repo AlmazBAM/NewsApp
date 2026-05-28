@@ -16,10 +16,7 @@ import com.bagmanovam.domain.model.Settings
 import com.bagmanovam.domain.model.Theme
 import com.bagmanovam.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore("settings")
 
