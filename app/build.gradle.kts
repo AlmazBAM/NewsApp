@@ -44,6 +44,8 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+
     implementation(libs.androidx.core.ktx)
     implementation(project(":core:analytics"))
     implementation(project(":core:analytics-firebase"))
