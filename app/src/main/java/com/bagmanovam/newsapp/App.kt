@@ -6,6 +6,7 @@ import com.bagmanovam.data.di.networkModule
 import com.bagmanovam.news.di.appModule
 import com.bagmanovam.newsapp.di.platformModule
 import com.bagmanov.sync.di.syncModule
+import com.bagmanovam.analytics_firebase.di.analyticsFirebaseModule
 import com.bagmanovam.news.core.database.di.databaseModule
 import com.bagmanovam.notifications.di.notificationModule
 import com.bagmanovam.setting.di.settingModule
@@ -25,6 +26,7 @@ class App : Application() {
             modules(
                 appModule,
                 platformModule,
+                analyticsFirebaseModule,
                 dataModule,
                 databaseModule,
                 networkModule,
