@@ -2,6 +2,8 @@ package com.bagmanovam.news
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bagmanovam.analytics.AnalyticsEvent
+import com.bagmanovam.analytics.AnalyticsHelper
 import com.bagmanovam.domain.usecase.AddSubscriptionUseCase
 import com.bagmanovam.domain.usecase.ClearAllArticlesUseCase
 import com.bagmanovam.domain.usecase.GetAllSubscriptionsUseCase
@@ -27,6 +29,7 @@ class HomeScreenViewModel(
     private val getArticleByTopicsUseCase: GetArticlesByTopicsUseCase,
     private val removeSubscriptionUseCase: RemoveSubscriptionUseCase,
     private val updateArticlesForAllSubscriptionsUseCase: UpdateArticlesForAllSubscriptionsUseCase,
+    private val analyticsHelper: AnalyticsHelper
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeScreenState> =
@@ -63,10 +66,18 @@ class HomeScreenViewModel(
             HomeScreenAction.OnClickSubscribe -> {
                 viewModelScope.launch {
                     val topic = _state.value.topic
-                    _state.update { state ->
-                        state.copy(topic = "")
+                    if (topic.isNotBlank()) {
+                        analyticsHelper.logEvent(
+                            AnalyticsEvent(
+                                name = AnalyticsEvent.Types.BUTTON_CLICK,
+                                params = mapOf("topic" to topic)
+                            )
+                        )
+                        _state.update { state ->
+                            state.copy(topic = "")
+                        }
+                        addSubscriptionUseCase(topic)
                     }
-                    addSubscriptionUseCase(topic)
                 }
             }
 
