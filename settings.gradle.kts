@@ -29,6 +29,7 @@ rootProject.name = "newsApp"
 includeBuild("build-logic")
 include(":app")
 include(":core")
+include(":core:analytics")
 include(":core:common")
 include(":core:domain")
 include(":core:data")

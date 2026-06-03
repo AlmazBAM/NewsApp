@@ -45,6 +45,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+    implementation(project(":core:analytics"))
     implementation(project(":core:common"))
     implementation(project(":core:data"))
     implementation(project(":core:database"))
