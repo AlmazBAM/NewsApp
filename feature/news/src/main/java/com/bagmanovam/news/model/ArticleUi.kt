@@ -1,7 +1,10 @@
 package com.bagmanovam.news.model
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.ui.text.intl.Locale
+import com.bagmanovam.common.presentation.utils.DateFormatter
 import com.bagmanovam.domain.model.Article
+import kotlin.text.format
 
 
 @Immutable
@@ -10,8 +13,8 @@ data class ArticleUi(
     val description: String,
     val imageUrl: String?,
     val sourceName: String,
-    val publishedAt: Long,
-    val url: String
+    val publishedAt: String,
+    val url: String,
 )
 
 fun Article.toArticleUi(): ArticleUi {
@@ -20,7 +23,14 @@ fun Article.toArticleUi(): ArticleUi {
         description = this.description,
         imageUrl = this.imageUrl,
         sourceName = this.sourceName,
-        publishedAt = this.publishedAt,
+        publishedAt = this.publishedAt.displayableDate(),
         url = this.url
+    )
+}
+
+
+fun Long.displayableDate(): String {
+    return DateFormatter.formatDate(
+        timeStamp = this,
     )
 }

@@ -11,6 +11,7 @@ class AndroidFeatureImplConventionPlugin : Plugin<Project> {
 
         dependencies {
             add("implementation", libs.findLibrary("androidx-core-ktx").get())
+            add("implementation", project(":core:common"))
             add("implementation", project(":core:ui"))
             add("implementation", project(":core:navigation"))
 

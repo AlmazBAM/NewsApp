@@ -11,7 +11,6 @@ class AndroidFeatureApiConventionPlugin : Plugin<Project> {
 
         dependencies {
             add("implementation", libs.findLibrary("androidx-core-ktx").get())
-            add("implementation", project(":core:ui"))
             add("implementation", project(":core:navigation"))
 
             add("testImplementation", libs.findLibrary("junit").get())
