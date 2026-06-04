@@ -3,6 +3,7 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     alias(libs.plugins.news.android.application)
     alias(libs.plugins.news.android.application.compose)
+    id("com.google.gms.google-services")
 }
 
 android {

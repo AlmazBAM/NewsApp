@@ -1,3 +1,66 @@
+### ==========================================
+### 🚨 СЕКРЕТЫ, КЛЮЧИ И УЧЕТНЫЕ ДАННЫЕ 🚨
+### ==========================================
+
+# Firebase & Google Cloud
+google-services.json
+**/google-services.json
+**/google-services.json.bak
+**/serviceAccount.json
+**/service-account.json
+**/firebase-service-account.json
+**/gcp-credentials.json
+
+# Sentry & Crash Reporting (Crashlytics, Fabric)
+sentry.properties
+**/sentry.properties
+.sentryclirc
+**/.sentryclirc
+crashlytics.properties
+**/crashlytics.properties
+crashlytics-build.properties
+**/crashlytics-build.properties
+fabric.properties
+**/fabric.properties
+com_crashlytics_export_strings.xml
+**/com_crashlytics_export_strings.xml
+
+# Переменные окружения и локальные конфиги
+.env
+.env.*
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+config.local.json
+secrets.json
+**/secrets.json
+credentials.json
+**/credentials.json
+
+# Облачные провайдеры (AWS, Azure и т.д.)
+.aws/credentials
+**/.aws/credentials
+aws-credentials.json
+**/aws-credentials.json
+
+# Общие API ключи, токены и приватные ключи
+**/api_keys.*
+**/api-keys.*
+**/keys.json
+**/tokens.json
+**/secrets.*
+**/private_key.*
+**/private-key.*
+
+### ==========================================
+### 🛡️ БЕЗОПАСНАЯ КОНФИГУРАЦИЯ СБОРКИ
+### ==========================================
+# Локальные свойства Gradle (безопасно для секретов)
+gradle-local.properties
+**/gradle-local.properties
+
 ### Java template
 # Compiled class file
 *.class
@@ -42,12 +105,6 @@ cmake-build-*/
 # JIRA plugin
 atlassian-ide-plugin.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
-
 ### Android template
 # Gradle files
 .gradle/
@@ -81,15 +138,17 @@ output.json
 *.ap_
 *.aab
 
-# Local configuration file (sdk path, etc)
+# Локальный конфиг (sdk path, секреты)
 local.properties
 !gradle.properties
 
-# Keystore files
+# Keystore files (файлы подписи)
 *.jks
 *.keystore
+**/*.jks
+**/*.keystore
 key/
-key
+**/key/
 
 # IntelliJ
 out/
