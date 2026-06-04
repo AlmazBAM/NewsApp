@@ -65,7 +65,9 @@ fun ArticleCard(
         }
 
         Text(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .padding(top = if (article.imageUrl != null) 0.dp else 16.dp),
             text = article.title,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
@@ -95,7 +97,7 @@ fun ArticleCard(
                 color = MaterialTheme.colorScheme.primary
             )
             Text(
-                text = article.publishedAt.toString(),
+                text = article.publishedAt,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 12.sp
             )
