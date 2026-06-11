@@ -43,6 +43,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
             buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
             buildConfigField(
                 "String",
