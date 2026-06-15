@@ -25,7 +25,7 @@ jobs:
 
       - name: Create local.properties file
         run: |
-          echo "SIGNING_KEYSTORE_FILE=app/release.keystore" > local.properties
+          echo "SIGNING_KEYSTORE_FILE=app/key/keystore.jks" > local.properties
           echo "SIGNING_KEYSTORE_PASSWORD=${{ secrets.SIGNING_KEYSTORE_PASSWORD }}" >> local.properties
           echo "SIGNING_KEY_ALIAS=${{ secrets.SIGNING_KEY_ALIAS }}" >> local.properties
           echo "SIGNING_KEY_PASSWORD=${{ secrets.SIGNING_KEY_PASSWORD }}" >> local.properties
@@ -36,8 +36,10 @@ jobs:
           GOOGLE_SERVICES_JSON: ${{ secrets.GS_JSON }}
         run: |
           mkdir -p app
-          echo "$GOOGLE_SERVICES_JSON" | base64 --decode > app/google-services.json
-          ls -la app/google-services.json
+          # Используем printf или heredoc для более надежной записи
+          printf "%s" "$GOOGLE_SERVICES_JSON" | base64 --decode > app/google-services.json
+          # Проверим, что файл не пустой (выведет размер в байтах)
+          ls -lh app/google-services.json
 
       - name: Decode Keystore
         env:
