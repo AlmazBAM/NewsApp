@@ -32,13 +32,11 @@ jobs:
           echo "NEWS_API_KEY=${{ secrets.NEWS_API_KEY }}" >> local.properties
           
       - name: Decode Google Services
-        env:
-          GOOGLE_SERVICES_JSON: ${{ secrets.GS_JSON }}
         run: |
           mkdir -p app
-          # Используем printf или heredoc для более надежной записи
-          printf "%s" "$GOOGLE_SERVICES_JSON" | base64 --decode > app/google-services.json
-          # Проверим, что файл не пустой (выведет размер в байтах)
+          printf "%s" "${{ secrets.GS_JSON }}" | base64 --decode > app/google-services.json
+          echo "File size: $(stat -c%s app/google-services.json) bytes"
+          python3 -m json.tool app/google-services.json > /dev/null && echo "JSON is valid" || echo "JSON IS INVALID"
           ls -lh app/google-services.json
 
       - name: Decode Keystore
