@@ -43,6 +43,11 @@ jobs:
           GS_JSON_BASE64: ${{ secrets.GS_JSON }}
         run: |
           mkdir -p app
+          # 1. Жесткая проверка: если секрет пустой, падаем с понятной ошибкой
+          if [ -z "$GS_JSON_BASE64" ]; then
+            echo "::error::Secret 'GS_JSON' is empty or not set in GitHub Settings!"
+            exit 1
+          fi
           echo "✅ Secret found. Length: ${#GS_JSON_BASE64} characters"
           printf "%s" "$GS_JSON_BASE64" | tr -d '\n\r ' | base64 --decode > app/google-services.json
           echo "File size: $(stat -c%s app/google-services.json) bytes"
