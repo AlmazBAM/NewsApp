@@ -3,6 +3,7 @@ name: Android CD (Release)
 on:
   push:
     branches: ["master", "main", "develop"]
+    tags: ["v*"]
 
 permissions:
   contents: write
@@ -65,8 +66,15 @@ jobs:
       - name: Build Release APK
         run: ./gradlew assembleRelease
 
+      - name: Upload Apk to artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk-${{ github.run_number }}
+          path: app/build/outputs/apk/release/*.apk
+          retention-days: 1
 
       - name: Create GitHub Release
+        if: startsWith(github.refs, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: app/build/outputs/apk/release/*.apk
