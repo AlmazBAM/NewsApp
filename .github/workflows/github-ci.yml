@@ -24,17 +24,27 @@ jobs:
           cache: gradle
 
       - name: Create local.properties file
+        env:
+          KS_PASS: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          NEWS_KEY: ${{ secrets.NEWS_API_KEY }}
         run: |
-          echo "SIGNING_KEYSTORE_FILE=app/key/keystore.jks" > local.properties
-          echo "SIGNING_KEYSTORE_PASSWORD=${{ secrets.SIGNING_KEYSTORE_PASSWORD }}" >> local.properties
-          echo "SIGNING_KEY_ALIAS=${{ secrets.SIGNING_KEY_ALIAS }}" >> local.properties
-          echo "SIGNING_KEY_PASSWORD=${{ secrets.SIGNING_KEY_PASSWORD }}" >> local.properties
-          echo "NEWS_API_KEY=${{ secrets.NEWS_API_KEY }}" >> local.properties
+          cat << EOF > local.properties
+          SIGNING_KEYSTORE_FILE=app/key/keystore.jks
+          SIGNING_KEYSTORE_PASSWORD=$KS_PASS
+          SIGNING_KEY_ALIAS=$KEY_ALIAS
+          SIGNING_KEY_PASSWORD=$KEY_PASS
+          NEWS_API_KEY=$NEWS_KEY
+          EOF
           
       - name: Decode Google Services
+        env:
+          GS_JSON_BASE64: ${{ secrets.GS_JSON }}
         run: |
           mkdir -p app
-          printf "%s" "${{ secrets.GS_JSON }}" | base64 --decode > app/google-services.json
+          echo "✅ Secret found. Length: ${#GS_JSON_BASE64} characters"
+          printf "%s" "$GS_JSON_BASE64" | tr -d '\n\r ' | base64 --decode > app/google-services.json
           echo "File size: $(stat -c%s app/google-services.json) bytes"
           python3 -m json.tool app/google-services.json > /dev/null && echo "JSON is valid" || echo "JSON IS INVALID"
           ls -lh app/google-services.json
