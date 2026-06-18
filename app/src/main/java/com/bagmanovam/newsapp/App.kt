@@ -1,13 +1,13 @@
 package com.bagmanovam.newsapp
 
 import android.app.Application
-import com.bagmanovam.data.di.dataModule
-import com.bagmanovam.data.di.networkModule
-import com.bagmanovam.news.di.appModule
-import com.bagmanovam.newsapp.di.platformModule
 import com.bagmanov.sync.di.syncModule
 import com.bagmanovam.analytics_firebase.di.analyticsFirebaseModule
+import com.bagmanovam.data.di.dataModule
+import com.bagmanovam.network.di.networkModule
 import com.bagmanovam.news.core.database.di.databaseModule
+import com.bagmanovam.news.di.appModule
+import com.bagmanovam.newsapp.di.platformModule
 import com.bagmanovam.notifications.di.notificationModule
 import com.bagmanovam.setting.di.settingModule
 import org.koin.android.ext.koin.androidContext

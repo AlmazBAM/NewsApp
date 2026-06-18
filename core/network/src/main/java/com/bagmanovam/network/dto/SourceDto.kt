@@ -1,4 +1,4 @@
-package com.bagmanovam.data.internet.dto
+package com.bagmanovam.network.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

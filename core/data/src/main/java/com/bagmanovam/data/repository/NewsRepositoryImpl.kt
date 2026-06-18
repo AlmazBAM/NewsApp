@@ -3,23 +3,22 @@ package com.bagmanovam.data.repository
 import android.util.Log
 import com.bagmanovam.common.domain.onError
 import com.bagmanovam.common.domain.onSuccess
-import com.bagmanovam.news.core.database.NewsDao
-import com.bagmanovam.news.core.database.dto.ArticleDbDto
-import com.bagmanovam.news.core.database.dto.SubscriptionDbDto
-import com.bagmanovam.data.internet.NewsApi
 import com.bagmanovam.data.mapper.toArticle
 import com.bagmanovam.data.mapper.toArticleDb
 import com.bagmanovam.data.mapper.toQueryParam
 import com.bagmanovam.domain.model.Article
 import com.bagmanovam.domain.model.Language
 import com.bagmanovam.domain.repository.NewsRepository
+import com.bagmanovam.network.NewsApi
+import com.bagmanovam.news.core.database.NewsDao
+import com.bagmanovam.news.core.database.dto.ArticleDbDto
+import com.bagmanovam.news.core.database.dto.SubscriptionDbDto
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlin.collections.emptyList
 
 class NewsRepositoryImpl(
     private val newsDao: NewsDao,

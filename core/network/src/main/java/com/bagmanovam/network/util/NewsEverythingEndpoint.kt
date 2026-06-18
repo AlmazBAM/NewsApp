@@ -1,8 +1,8 @@
-package com.bagmanovam.data.internet.util
+package com.bagmanovam.network.util
 
 import com.bagmanovam.common.data.Endpoint
 
-class NewsEverythingEndpoint(
+class  NewsEverythingEndpoint(
     private val query: String,
     private val language: String = "en"
 ): Endpoint {

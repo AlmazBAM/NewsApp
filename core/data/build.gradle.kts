@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.news.android.data)
     alias(libs.plugins.news.koin)
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -9,5 +8,4 @@ android {
 }
 
 dependencies {
-    implementation(libs.bundles.ktor)
 }

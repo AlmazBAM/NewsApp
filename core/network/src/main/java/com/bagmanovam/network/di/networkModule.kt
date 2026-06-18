@@ -1,8 +1,8 @@
-package com.bagmanovam.data.di
+package com.bagmanovam.network.di
 
 import com.bagmanovam.common.data.ApiConfig
-import com.bagmanovam.data.internet.util.KtorUrlBuilder
-import com.bagmanovam.data.internet.NewsApi
+import com.bagmanovam.network.NewsApi
+import com.bagmanovam.network.util.KtorUrlBuilder
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.DefaultRequest

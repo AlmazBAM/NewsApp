@@ -3,12 +3,12 @@
 package com.bagmanovam.data.mapper
 
 import android.os.Build
-import com.bagmanovam.data.internet.dto.ArticleDto
 import com.bagmanovam.domain.model.Article
 import com.bagmanovam.domain.model.Language
 import com.bagmanovam.domain.model.RefreshConfig
 import com.bagmanovam.domain.model.Settings
 import com.bagmanovam.domain.model.UpdateInterval
+import com.bagmanovam.network.dto.ArticleDto
 import com.bagmanovam.news.core.database.dto.ArticleDbDto
 import java.time.LocalDateTime
 import java.time.ZoneOffset

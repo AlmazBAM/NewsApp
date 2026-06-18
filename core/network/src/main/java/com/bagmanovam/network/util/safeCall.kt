@@ -1,12 +1,12 @@
-package com.bagmanovam.data.internet.util
+package com.bagmanovam.network.util
 
 import com.bagmanovam.common.domain.NetworkError
-import com.bagmanovam.common.domain.Result
 import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
 import kotlinx.coroutines.ensureActive
 import kotlinx.serialization.SerializationException
 import kotlin.coroutines.coroutineContext
+import com.bagmanovam.common.domain.Result
 
 suspend inline fun <reified T> safeCall(
     execute: () -> HttpResponse

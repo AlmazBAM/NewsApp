@@ -1,11 +1,11 @@
-package com.bagmanovam.data.internet.util
+package com.bagmanovam.network.util
 
 
 import com.bagmanovam.common.domain.NetworkError
-import com.bagmanovam.common.domain.Result
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
+import com.bagmanovam.common.domain.Result
 
 suspend inline fun <reified T> responseToResult(
     response: HttpResponse

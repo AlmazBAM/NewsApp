@@ -1,4 +1,4 @@
-package com.bagmanovam.data.internet.util
+package com.bagmanovam.network.util
 
 import com.bagmanovam.common.data.ApiConfig
 import com.bagmanovam.common.data.Endpoint
